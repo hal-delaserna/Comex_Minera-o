@@ -33,9 +33,9 @@ source('D:/Users/humberto.serna/Desktop/Anuario_Mineral_Brasileiro/Funcoes_de_Fo
 # carregamento ----
 # _____ Tabela de Relacionamentos  ----
 
-NCM_CNAE_Relacionamentos <-
+NCM_CNAE_Relacionamentos <-     # tabela do Mariano Laio
   read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/NCM_CNAE_Relacionamentos_FINAL.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/NCM_CNAE_Relacionamentos_FINAL.csv',
     header = TRUE,
     sep = ";",
     #skip = 1286, nrows = 1,
@@ -62,7 +62,7 @@ NCM_Mineracao <-
 # _____ unidades de medida -----
 und_medida <-
   read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/NCM_UNIDADE.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/NCM_UNIDADE.csv',
     header = TRUE,
     sep = ";", 
     colClasses = c('character'),
@@ -91,11 +91,11 @@ und_medida <-
 # _____ BASE EXPORTAÇAO                            ####
 
 # carregar arquivo pronto
-# exportacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/EXP_COMPLETA.RDATA')
+# exportacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/EXP_COMPLETA.RDATA')
 
  exportacao <-
  read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/EXP_2020.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/EXP_2020.csv',
     header =  TRUE,
     sep = ";", # skip =  19038449, 15800261, nrows = 5823354,
     stringsAsFactors = FALSE, 
@@ -139,20 +139,20 @@ exportacao <-
   left_join(exportacao, 
             unique(NCM_CNAE_Relacionamentos[, c("CO_NCM",#                                   2197 NCMs na mineração
                                                 "NO_NCM_POR",
-                                                "CO_FAT_AGREG",#                             2197 linhas
-                                                "NO_FAT_AGREG",
-                                                "NO_FAT_AGREG_GP",#                          2197 linhas
-                                                "SUBSTANCIA",#                               2198 linhas
-                                                "CNAE.2.3.Secao.Codigo",#                    2207 linhas
-                                                "CNAE.2.3.Secao.Descricao",
-                                                "CNAE.2.3.Divisao.Codigo",#                  2270 linhas
-                                                "CNAE.2.3.Divisao.Descricao",
-                                                "CNAE.2.3.Grupo.Codigo",#                    2291 linhas
-                                                "CNAE.2.3.Grupo.Descricao",
-                                                "CNAE.2.3.Classe.Codigo...ProdList.2019",#   2430 linhas
-                                                "CNAE.2.3.Classe.Descricao...ProdList.2019",                                         
-                                                "PRODUTO.ProdList.Ind.2019.Codigo",
-                                                "PRODUTO.ProdList.Ind.2019.Descricao"#,
+                                                #"CO_FAT_AGREG",#                             2197 linhas
+                                                #"NO_FAT_AGREG",
+                                                #"NO_FAT_AGREG_GP",#                          2197 linhas
+                                                "SUBSTANCIA"#,#                               2198 linhas
+                                                #"CNAE.2.3.Secao.Codigo",#                    2207 linhas
+                                                #"CNAE.2.3.Secao.Descricao",
+                                                #"CNAE.2.3.Divisao.Codigo",#                  2270 linhas
+                                                #"CNAE.2.3.Divisao.Descricao",
+                                                #"CNAE.2.3.Grupo.Codigo",#                    2291 linhas
+                                                #"CNAE.2.3.Grupo.Descricao",
+                                                #"CNAE.2.3.Classe.Codigo...ProdList.2019",#   2430 linhas
+                                                #"CNAE.2.3.Classe.Descricao...ProdList.2019",                                         
+                                                #"PRODUTO.ProdList.Ind.2019.Codigo",
+                                                #"PRODUTO.ProdList.Ind.2019.Descricao"#,
                                                 #"ProdList.Servicos.associados.2019.Codigo",
                                                 #"ProdList.Servicos.associados.2019.Descricao",
                                                 #"CNAE.2.3.Classe.Codigo...ProdList.2016",
@@ -168,7 +168,7 @@ exportacao <-
 
 # __________ País ----
 pais <- 
-  read.table(file = "./CSV_Data/ComexStat/PAIS.csv", header = TRUE, sep = ";", stringsAsFactors = FALSE, colClasses = 'character')
+  read.table(file = "D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/PAIS.csv", header = TRUE, sep = ";", stringsAsFactors = FALSE, colClasses = 'character')
 
 pais <- 
   pais[,c(
@@ -230,11 +230,11 @@ exportacao[exportacao$SUBSTANCIA %in% listagem &
 #rm(exportacao)
 
 # carregar arquivo pronto
-#importacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/IMP_COMPLETA.RDATA')
+#importacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/IMP_COMPLETA.RDATA')
 
 importacao <-
   read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/IMP_2020.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/IMP_2020.csv',
     header = TRUE,   
     sep = ";", # skip = 28737260,  23417130, nrows = 9091054,
     stringsAsFactors = FALSE, 
@@ -272,34 +272,37 @@ importacao <-
 
 # __________ Junção com Tabela de Relacionamentos NCMs-CNAES-Substâncias ----
 importacao <-
-  left_join(importacao, unique(NCM_CNAE_Relacionamentos[, c("CO_NCM",#                                   2197 NCMs na mineração
-                                                            "NO_NCM_POR",
-                                                            "CO_FAT_AGREG",#                             2197 linhas
-                                                            "NO_FAT_AGREG",
-                                                            "NO_FAT_AGREG_GP",#                          2197 linhas
-                                                            "SUBSTANCIA",#                               2198 linhas
-                                                            "CNAE.2.3.Secao.Codigo",#                    2207 linhas
-                                                            "CNAE.2.3.Secao.Descricao",
-                                                            "CNAE.2.3.Divisao.Codigo",#                  2270 linhas
-                                                            "CNAE.2.3.Divisao.Descricao",
-                                                            "CNAE.2.3.Grupo.Codigo",#                    2291 linhas
-                                                            "CNAE.2.3.Grupo.Descricao",
-                                                            "CNAE.2.3.Classe.Codigo...ProdList.2019",#   2430 linhas
-                                                            "CNAE.2.3.Classe.Descricao...ProdList.2019",                                         
-                                                            "PRODUTO.ProdList.Ind.2019.Codigo",
-                                                            "PRODUTO.ProdList.Ind.2019.Descricao"#,
-                                                            #"ProdList.Servicos.associados.2019.Codigo",
-                                                            #"ProdList.Servicos.associados.2019.Descricao",
-                                                            #"CNAE.2.3.Classe.Codigo...ProdList.2016",
-                                                            #"CNAE.2.3.Classe.Descricao...ProdList.2016",
-                                                            #"PRODUTO.ProdList.Ind.2016.Codigo",
-                                                            #"PRODUTO.ProdList.Ind.2016.Descricao",
-                                                            #"ProdList.Servicos.associados.2016.Codigo",
-                                                            #"ProdList.Servicos.associados.2016.Descricao",
-                                                            #"CO_UNID",
-                                                            #"NO_UNID",
-                                                            #"SG_UNID"
-                                                            )]), by = "CO_NCM")
+  left_join(importacao, 
+            unique(NCM_CNAE_Relacionamentos[, c("CO_NCM",#                                   2197 NCMs na mineração
+                                                "NO_NCM_POR",
+                                                #"CO_FAT_AGREG",#                             2197 linhas
+                                                #"NO_FAT_AGREG",
+                                                #"NO_FAT_AGREG_GP",#                          2197 linhas
+                                                "SUBSTANCIA"#,#                               2198 linhas
+                                                #"CNAE.2.3.Secao.Codigo",#                    2207 linhas
+                                                #"CNAE.2.3.Secao.Descricao",
+                                                #"CNAE.2.3.Divisao.Codigo",#                  2270 linhas
+                                                #"CNAE.2.3.Divisao.Descricao",
+                                                #"CNAE.2.3.Grupo.Codigo",#                    2291 linhas
+                                                #"CNAE.2.3.Grupo.Descricao",
+                                                #"CNAE.2.3.Classe.Codigo...ProdList.2019",#   2430 linhas
+                                                #"CNAE.2.3.Classe.Descricao...ProdList.2019",                                         
+                                                #"PRODUTO.ProdList.Ind.2019.Codigo",
+                                                #"PRODUTO.ProdList.Ind.2019.Descricao"#,
+                                                #"ProdList.Servicos.associados.2019.Codigo",
+                                                #"ProdList.Servicos.associados.2019.Descricao",
+                                                #"CNAE.2.3.Classe.Codigo...ProdList.2016",
+                                                #"CNAE.2.3.Classe.Descricao...ProdList.2016",
+                                                #"PRODUTO.ProdList.Ind.2016.Codigo",
+                                                #"PRODUTO.ProdList.Ind.2016.Descricao",
+                                                #"ProdList.Servicos.associados.2016.Codigo",
+                                                #"ProdList.Servicos.associados.2016.Descricao",
+                                                #"CO_UNID",
+                                                #"NO_UNID",
+                                                #"SG_UNID"
+            )]), by = "CO_NCM")
+
+
 
 # __________ País ----
 importacao <- 
@@ -683,5 +686,8 @@ Exportacao_df <-
   group_by(exportacao_PIA_ajustada, CO_ANO, Trimestre, CNAE.2.3.Secao.Descricao, CO_NCM.x, NO_NCM_POR, NO_FAT_AGREG,  SUBSTANCIA, CO_PAIS, NO_PAIS) %>% summarise(sum(VL_FOB))
 
 #   write.table(Exportacao_df, "Exportacao_df.csv", sep = ";", dec = ",", row.names = FALSE, na = "")        
+
+
+
 
 
