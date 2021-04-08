@@ -29,7 +29,7 @@ source('D:/Users/humberto.serna/Desktop/Anuario_Mineral_Brasileiro/Funcoes_de_Fo
 
 NCM_CNAE_Relacionamentos <-                                 # tabela do Mariano Laio
   read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/NCM_CNAE_Relacionamentos_FINAL.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/NCM_CNAE_Relacionamentos_FINAL.csv',
     header = TRUE,
     sep = ";",
     #skip = 1286, nrows = 1,
@@ -52,7 +52,7 @@ NCM_Mineracao <-
 # _____ unidades de medida -----
 und_medida <-
   read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/NCM_UNIDADE.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/NCM_UNIDADE.csv',
     header = TRUE,
     sep = ";", 
     colClasses = c('character'),
@@ -61,15 +61,18 @@ und_medida <-
   )
 
 
+
+
+
 # _____ BASE EXPORTAÇAO                            ####
 
 # carregar arquivo pronto    
 
-# exportacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/EXP_COMPLETA.RDATA')
+# exportacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/EXP_COMPLETA.RDATA')
 
 exportacao <- #  fazer uma vez, e salvar em RDATA
  read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/EXP_2020.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/EXP_2020.csv',
     header =  TRUE,
     sep = ";", #skip =  19038449, 15800261, nrows = 5823354,
     stringsAsFactors = FALSE, 
@@ -79,7 +82,7 @@ exportacao <- #  fazer uma vez, e salvar em RDATA
     encoding = "UTF-8", fill = TRUE #       UTF-8 contém US-ASCII 
   )
 
-#    saveRDS(object = exportacao, file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/EXP_COMPLETA.RDATA')
+#    saveRDS(object = exportacao, file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/EXP_COMPLETA.RDATA')
 
 
 # __________ und de medida 
@@ -102,19 +105,19 @@ exportacao <-
                                                             #"CNAE.2.3.Classe.Codigo...ProdList.2019",
                                                             #"CNAE.2.3.Classe.Descricao...ProdList.2019",
                                                             "CNAE.2.3.Secao.Codigo",
-                                                            "CNAE.2.3.Secao.Descricao"#,
+                                                            "CNAE.2.3.Secao.Descricao",
                                                             #"CNAE.2.3.Divisao.Codigo",
                                                             #"CNAE.2.3.Divisao.Descricao",
                                                             #"CNAE.2.3.Grupo.Codigo",
                                                             #"CNAE.2.3.Grupo.Descricao",
-                                                            #"PRODUTO.ProdList.Ind.2019.Codigo",
-                                                            #"PRODUTO.ProdList.Ind.2019.Descricao",
+                                                            "PRODUTO.ProdList.Ind.2019.Codigo",
+                                                            "PRODUTO.ProdList.Ind.2019.Descricao"#,
                                                             #"ProdList.Servicos.associados.2019.Codigo",
                                                             #"ProdList.Servicos.associados.2019.Descricao",
                                                             #"CNAE.2.3.Classe.Codigo...ProdList.2016",
                                                             #"CNAE.2.3.Classe.Descricao...ProdList.2016",
-                                                            #"PRODUTO.ProdList.Ind.2016.Codigo",
-                                                            #"PRODUTO.ProdList.Ind.2016.Descricao",
+                                                            #PRODUTO.ProdList.Ind.2016.Codigo",
+                                                            #PRODUTO.ProdList.Ind.2016.Descricao",
                                                             #"ProdList.Servicos.associados.2016.Codigo",
                                                             #"ProdList.Servicos.associados.2016.Descricao"
                                                             )]), 
@@ -122,7 +125,7 @@ exportacao <-
 
 # __________ País ----
 pais <- 
-  read.table(file = "./CSV_Data/ComexStat/PAIS.csv", header = TRUE, sep = ";", stringsAsFactors = FALSE, colClasses = 'character')
+  read.table(file = "./CSV_Data/Comex_Mineracao/PAIS.csv", header = TRUE, sep = ";", stringsAsFactors = FALSE, colClasses = 'character')
 
 pais <- 
   pais[,c(
@@ -216,7 +219,7 @@ for (ano in 1997:2020) {
   write.table(
     x = a,
     file = paste(
-      'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/',
+      'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/',
       'EXPORTAÇÃO_',
       ano,
       ".csv",
@@ -237,11 +240,11 @@ for (ano in 1997:2020) {
 #rm(exportacao)
 
 # carregar arquivo pronto
-# importacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/IMP_COMPLETA.RDATA')
+# importacao <- readRDS(file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/IMP_COMPLETA.RDATA')
 
 importacao <-
   read.table(
-    file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/IMP_2020.csv',
+    file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/IMP_2020.csv',
     header = TRUE,   
     sep = ";", # skip = 28737260,  23417130, nrows = 9091054,
     stringsAsFactors = FALSE, 
@@ -251,7 +254,7 @@ importacao <-
     encoding = "UTF-8", fill = TRUE #      UTF-8 contém US-ASCII 
   )
 
-# saveRDS(object = importacao,  file = 'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/IMP_COMPLETA.RDATA')
+# saveRDS(object = importacao,  file = 'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/IMP_COMPLETA.RDATA')
 
 # __________ und de medida 
 importacao <- 
@@ -375,7 +378,7 @@ for (ano in 1997:2020) {
   write.table(
     x = a,
     file = paste(
-      'D:/Users/humberto.serna/Documents/CSV_Data/ComexStat/',
+      'D:/Users/humberto.serna/Documents/CSV_Data/Comex_Mineracao/',
       'IMPORTAÇÃO_',
       ano,
       ".csv",
